@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>nekonium signiture</title>
+</head>
+<body>
+
+<style type="text/css">
+
+input {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #aaa;
+  background: #fff;
+  border-radius: 0;
+  appearance: none;
+  color: #333;
+}
+
+
+</style>
+
+	
+<form name="js">
+<input id="address" type="text" value="" style="width:800px" placeholder="address" onChange="update()" /><br />
+<input id="name" type="text" value="" style="width:800px" placeholder="name" onChange="update()" /><br />
+</form>
+
+<br>
+
+<canvas id="sig"></canvas>
+
+<script>
+
+
+var address = document.js.address.value;
+var name = document.js.name.value;
+var loadedCounter = 0;
+var imgAry = [];
+var fileAry = ['https://raw.githubusercontent.com/nekonium/nekonium.github.io/master/nekonium.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=M|0&chl='+address];
+var numFiles = fileAry.length;
+
+var sig = document.getElementById('sig');
+var sigCtx = sig.getContext('2d');
+sig.width = 800;
+sig.height =500;
+
+
+window.onload = function() {
+    loadImgs();
+};
+
+function loadImgs(){
+
+    var img = new Image();
+
+    img.addEventListener('load', function(){
+        loadedCounter++;
+        imgAry.push(img);
+        if(numFiles == loadedCounter){
+            display();
+        } else {
+            loadImgs();
+        }
+    }, false);
+    
+    img.src = fileAry[imgAry.length];
+}
+
+
+function display(){
+    
+    sigCtx.fillStyle = 'rgb(255,255,255)';
+    sigCtx.fillRect(0, 0, 800, 500);
+    sigCtx.drawImage(imgAry[0], 50, 150, 300, 300);
+    sigCtx.drawImage(imgAry[1], 450, 150, 300, 300);
+    sigCtx.font = "120px Arial";
+    sigCtx.textAlign = "center";
+    sigCtx.fillStyle = 'rgb(0,0,0nukoninu)';
+    sigCtx.fillText(name,400,100);
+
+}
+
+function update(){
+    
+    address = document.js.address.value;
+    name = document.js.name.value;
+    loadedCounter = 0;
+    imgAry = [];
+    fileAry = ['https://raw.githubusercontent.com/nekonium/nekonium.github.io/master/nekonium.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=M|0&chl='+address];
+    numFiles = fileAry.length;
+
+    sig = document.getElementById('sig');
+    sigCtx = sig.getContext('2d');
+    sig.width = 800;
+    sig.height = 500;
+    
+    loadImgs();
+}
+
+
+</script>
+</body>
+</html>
