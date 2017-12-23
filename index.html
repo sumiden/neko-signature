@@ -42,12 +42,13 @@
 
 <div class="main">
 <form name="js">
-<input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
 <input id="name" type="text" value="" style="display:none;" placeholder="name" onChange="update()" ><br />
+<input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
 </form>
+<br>
 
-<canvas id="sig"></canvas>
-
+<canvas id="sig" style="display:none;"></canvas>
+<div id="result"></div>
 </div>
 
 <div class="footer">
@@ -82,7 +83,7 @@ window.onload = function() {
 function loadImgs(){
 
     var img = new Image();
-
+    img.crossOrigin = 'anonymous';
     img.addEventListener('load', function(){
         loadedCounter++;
         imgAry.push(img);
@@ -103,6 +104,8 @@ function display(){
     sigCtx.fillRect(0, 0, 500, 555);
     sigCtx.drawImage(imgAry[1], 0, 0, 500, 500);
     sigCtx.drawImage(imgAry[2], 0, 0, 500, 560);
+    var data = sig.toDataURL();
+    document.getElementById('result').innerHTML = '<img src="' + data + '">';
 //    sigCtx.font = "120px Arial";
 //    sigCtx.textAlign = "center";
 //    sigCtx.fillStyle = 'rgb(0,0,0)';
@@ -126,7 +129,6 @@ function update(){
     
     loadImgs();
 }
-
 
 
 </script>
