@@ -2,43 +2,62 @@
 <html lang="ja">
 <head>
 	<meta charset="UTF-8">
-	<title>nekonium signiture</title>
+	<title>nuko QR generator</title>
+	<style>
+	    .all {
+	        max-width: 900px;
+	        margin: auto;
+	        text-Align: center;
+        }
+        .title{
+            margin: 0 0 0 0;
+            font-size: 230%;
+            color: #333333;
+            padding: 5px 10px;
+            font-weight:700;
+        }
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #aaa;
+            background: #fff;
+            border-radius: 0;
+            color: #333;
+        }
+        .footer{
+            
+        }
+        .title,.main,.footer,canvs{
+        width:100%;}
+        body{margin:0;}
+	</style>
 </head>
 <body>
 
-<style type="text/css">
+<div class="all">
 
-input {
-  width: 100%;
-  padding: 10px;
-  border: 1px solid #aaa;
-  background: #fff;
-  border-radius: 0;
-  appearance: none;
-  color: #333;
-}
+<div class="title">
+ぬこQRじぇねれーたー
+</div>
 
-</style>
-
-	
+<div class="main">
 <form name="js">
-<h1><strong>ぬこQRじぇねれーたー</strong></h1>
 <input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
 <input id="name" type="text" value="" style="display:none;" placeholder="name" onChange="update()" ><br />
 </form>
 
-<br>
-
 <canvas id="sig"></canvas>
 
-<strong>
+</div>
+
+<div class="footer">
 <br><br><br>
 画像は自由に改変してもらってOKです。<br>
 超絶かわいい本家ロゴ⇒ <a href="https://nekonium.github.io/resources.html" target="_blank">github</a><br>
-<br></strong>
+<br>
 contact: <a href="https://twitter.com/surume07" target="_blank">@surume07</a><br>
-プール&画廊もやってます⇒ <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れにゃんにゃん</a><br>
-
+pool&画廊: <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れにゃんにゃん</a><br>
+</div>
 
 <script>
 
@@ -111,5 +130,7 @@ function update(){
 
 
 </script>
+
+</div>
 </body>
 </html>
