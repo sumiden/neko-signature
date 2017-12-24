@@ -42,8 +42,9 @@
 
 <div class="main">
 <form name="js">
-<input id="name" type="text" value="" style="display:none;" placeholder="name" onChange="update()" ><br />
 <input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
+<input id="footer1" type="text" value="" style="width:500px" placeholder="freespace(ex.name)" onChange="update()" ><br />
+<input id="footer2" type="text" value="" style="width:500px" placeholder="freespace(ex.address)" onChange="update()" ><br />
 </form>
 <br>
 
@@ -53,7 +54,7 @@
 
 <div class="footer">
 <br><br><br>
-画像は自由に改変してもらってOKです。<br>
+画像は自由に改変してもらってOKです。  
 超絶かわいい本家ロゴ⇒ <a href="https://nekonium.github.io/resources.html" target="_blank">github</a><br>
 <br>
 contact: <a href="https://twitter.com/surume07" target="_blank">@surume07</a><br>
@@ -63,7 +64,8 @@ pool&画廊: <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れに
 <script>
 
 var address = "0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b";
-var name = document.js.name.value;
+var footer1 = document.js.footer1.value;
+var footer2 = document.js.footer2.value;
 var loadedCounter = 0;
 var imgAry = [];
 var fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/face.png', 'img/font.png'];
@@ -72,7 +74,7 @@ var numFiles = fileAry.length;
 var sig = document.getElementById('sig');
 var sigCtx = sig.getContext('2d');
 sig.width = 500;
-sig.height =550;
+sig.height =560;
 
 
 window.onload = function() {
@@ -98,17 +100,19 @@ function loadImgs(){
 
 
 function display(){
-    
+    var footer1 = document.js.footer1.value;
+    var footer2 = document.js.footer2.value;
     sigCtx.fillStyle = 'rgb(255,255,255)';
     sigCtx.fillRect(0, 0, 500, 555);
     sigCtx.drawImage(imgAry[2], 0, 0, 500, 500);
     sigCtx.drawImage(imgAry[4], 0, 45, 500, 500);
     sigCtx.drawImage(imgAry[1], 0, 0, 500, 560);
     sigCtx.drawImage(imgAry[3], 0, 0, 500, 560);
-    sigCtx.font = "20px Arial";
+    sigCtx.font = "15px Arial";
     sigCtx.textAlign = "center";
     sigCtx.fillStyle = 'rgb(0,0,0)';
-    sigCtx.fillText(address,250,535);
+    sigCtx.fillText(footer1,250,535);
+    sigCtx.fillText(footer2,250,552);
     var data = sig.toDataURL();
     document.getElementById('result').innerHTML = '<img src="' + data + '">';
 
@@ -126,7 +130,7 @@ function update(){
     sig = document.getElementById('sig');
     sigCtx = sig.getContext('2d');
     sig.width = 500;
-    sig.height = 550;
+    sig.height = 560;
     
     loadImgs();
 }
