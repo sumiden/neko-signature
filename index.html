@@ -85,12 +85,13 @@ pool&画廊: <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れに
 
 <script>
 
-var address = "0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b";
+var initAddress = "0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b";
 var footer1 = document.js.footer1.value;
 var footer2 = document.js.footer2.value;
+var address = document.js.address.value;
 var loadedCounter = 0;
 var imgAry = [];
-var fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/face.png', 'img/font.png'];
+var fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+initAddress, 'img/face.png', 'img/font.png'];
 var numFiles = fileAry.length;
 
 var sig = document.getElementById('sig');
@@ -158,7 +159,7 @@ function update(){
 
 function copyas(){
     
-    document.js.footer1.value=document.js.address.value;
+    document.js.footer1.value = address;
     if(document.js.footer1.value!=""){
     update();
     }
