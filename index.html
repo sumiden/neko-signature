@@ -5,24 +5,26 @@
 	<title>nuko QR generator</title>
 	<style>
 	    .all {
-	        max-width: 500px;
+	        max-width: 550px;
 	        margin: auto;
 	        text-Align: center;
         }
         .title{
-            margin: 0 0 0 0;
             font-size: 230%;
             color: #333333;
             padding: 5px 10px;
             font-weight:700;
         }
         input {
-            width: 100%;
             padding: 10px;
             border: 1px solid #aaa;
             background: #fff;
             border-radius: 0;
             color: #333;
+        }
+
+        input[disabled]{
+            background: #DCDCDC;        
         }
         .footer{
             max-width: 500px;
@@ -31,24 +33,6 @@
             
         }
         .title,.main,.footer,canvs{
-            width:100%;}
-            body{margin:0;}
-            
-        .square {
-            width: 200px;
-            margin: auto;
-            display: inline-block;
-            padding: 0.3em 1em;
-            text-decoration: none;
-            color: #FF8C00;
-            border: solid 2px #FF8C00;
-            border-radius: 3px;
-            transition: .4s;
-        }
-
-        .square:hover {
-            background: #FF8C00;
-            color: white;
         }
 
 	</style>
@@ -63,10 +47,11 @@
 
 <div class="main">
 <form name="js">
-<input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
-<a href="#" class="square" onClick="copyas()" style="margin: 5px auto">freespaceにaddressを表示</a>
-<input id="footer1" type="text" value="" style="width:500px" placeholder="freespace(ex.address)" onChange="update()" ><br />
-<input id="footer2" type="text" value="" style="width:500px" placeholder="freespace(ex.name)" onChange="update()" ><br />
+<input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update0()" ><br />
+<br>
+<label><input type="checkbox" name="scb3" value="on" onclick="connecttext(this.checked);">option</label>
+<input id="footer1" type="text" value="" style="width:500px" placeholder="freespace(ex.address)" onChange="update()" disabled="true" ><br />
+<input id="footer2" type="text" value="" style="width:500px" placeholder="freespace(ex.name)" onChange="update()" disabled="true" ><br />
 </form>
 <br>
 
@@ -86,9 +71,9 @@ pool&画廊: <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れに
 <script>
 
 var initAddress = "0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b";
+var address = document.js.address.value;
 var footer1 = document.js.footer1.value;
 var footer2 = document.js.footer2.value;
-var address = document.js.address.value;
 var loadedCounter = 0;
 var imgAry = [];
 var fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+initAddress, 'img/face.png', 'img/font.png'];
@@ -123,22 +108,23 @@ function loadImgs(){
 
 
 function display(){
-    var footer1 = document.js.footer1.value;
-    var footer2 = document.js.footer2.value;
+    
+    footer1 = document.js.footer1.value;
+    footer2 = document.js.footer2.value;
     sigCtx.fillStyle = 'rgb(255,255,255)';
     sigCtx.fillRect(0, 0, 500, 555);
     sigCtx.drawImage(imgAry[2], 0, 0, 500, 500);
     sigCtx.drawImage(imgAry[4], 0, 45, 500, 500);
     sigCtx.drawImage(imgAry[1], 0, 0, 500, 560);
     sigCtx.drawImage(imgAry[3], 0, 0, 500, 560);
-    sigCtx.font = "15px Arial";
-    sigCtx.textAlign = "center";
+    sigCtx.font = "9px Arial";
     sigCtx.fillStyle = 'rgb(0,0,0)';
-    sigCtx.fillText(footer1,250,535);
-    sigCtx.fillText(footer2,250,552);
+    sigCtx.textAlign = "left";
+    sigCtx.fillText(footer1,25,550);
+    sigCtx.textAlign = "right";
+    sigCtx.fillText(footer2,475,550);
     var data = sig.toDataURL();
     document.getElementById('result').innerHTML = '<img src="' + data + '">';
-
 }
 
 function update(){
@@ -157,12 +143,22 @@ function update(){
     loadImgs();
 }
 
-function copyas(){
-    
-    document.js.footer1.value = address;
-    if(document.js.footer1.value!=""){
+function update0(){
+    document.js.footer1.value = document.js.address.value;
     update();
-    }
+}
+
+function connecttext(ischecked) {
+   if( ischecked == true ) {
+        // チェックが入っていたら有効化
+        document.getElementById('footer1').disabled = false;
+        document.getElementById('footer2').disabled = false;
+   }
+   else {
+        // チェックが入っていなかったら無効化
+        document.getElementById('footer1').disabled = true;
+        document.getElementById('footer2').disabled = true;
+   }
 }
 
 </script>
