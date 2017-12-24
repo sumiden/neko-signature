@@ -5,7 +5,7 @@
 	<title>nuko QR generator</title>
 	<style>
 	    .all {
-	        max-width: 900px;
+	        max-width: 500px;
 	        margin: auto;
 	        text-Align: center;
         }
@@ -25,11 +25,32 @@
             color: #333;
         }
         .footer{
+            max-width: 500px;
+	        margin: auto;
+	        text-Align: center;
             
         }
         .title,.main,.footer,canvs{
-        width:100%;}
-        body{margin:0;}
+            width:100%;}
+            body{margin:0;}
+            
+        .square {
+            width: 200px;
+            margin: auto;
+            display: inline-block;
+            padding: 0.3em 1em;
+            text-decoration: none;
+            color: #FF8C00;
+            border: solid 2px #FF8C00;
+            border-radius: 3px;
+            transition: .4s;
+        }
+
+        .square:hover {
+            background: #FF8C00;
+            color: white;
+        }
+
 	</style>
 </head>
 <body>
@@ -43,6 +64,7 @@
 <div class="main">
 <form name="js">
 <input id="address" type="text" value="" style="width:500px" placeholder="address" onChange="update()" ><br />
+<a href="#" class="square" onClick="copyas()" style="margin: 5px auto">freespaceにaddressを表示</a>
 <input id="footer1" type="text" value="" style="width:500px" placeholder="freespace(ex.address)" onChange="update()" ><br />
 <input id="footer2" type="text" value="" style="width:500px" placeholder="freespace(ex.name)" onChange="update()" ><br />
 </form>
@@ -53,8 +75,8 @@
 </div>
 
 <div class="footer">
-<br><br><br>
-画像は自由に改変してもらってOKです。  
+<br><br>
+画像は自由に改変してもらってOKです。<br>
 超絶かわいい本家ロゴ⇒ <a href="https://nekonium.github.io/resources.html" target="_blank">github</a><br>
 <br>
 contact: <a href="https://twitter.com/surume07" target="_blank">@surume07</a><br>
@@ -121,7 +143,6 @@ function display(){
 function update(){
     
     address = document.js.address.value;
-    name = document.js.name.value;
     loadedCounter = 0;
     imgAry = [];
     fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/face.png', 'img/font.png'];
@@ -135,6 +156,13 @@ function update(){
     loadImgs();
 }
 
+function copyas(){
+    
+    document.js.footer1.value=document.js.address.value;
+    if(document.js.footer1.value!=""){
+    update();
+    }
+}
 
 </script>
 
