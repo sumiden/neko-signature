@@ -62,18 +62,17 @@ pool&画廊: <a href="http://nuko.cep-k.work/#/" target="_blank">ここ掘れに
 
 <script>
 
-
-var address = document.js.address.value;
+var address = "0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b";
 var name = document.js.name.value;
 var loadedCounter = 0;
 var imgAry = [];
-var fileAry = ['img/nekonium.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl=0x42837f037059F8758e1b8Ed3c801D4A9BD9bb94b', 'img/arrange.png'];
+var fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/face.png', 'img/font.png'];
 var numFiles = fileAry.length;
 
 var sig = document.getElementById('sig');
 var sigCtx = sig.getContext('2d');
 sig.width = 500;
-sig.height =560;
+sig.height =550;
 
 
 window.onload = function() {
@@ -102,14 +101,16 @@ function display(){
     
     sigCtx.fillStyle = 'rgb(255,255,255)';
     sigCtx.fillRect(0, 0, 500, 555);
-    sigCtx.drawImage(imgAry[1], 0, 0, 500, 500);
-    sigCtx.drawImage(imgAry[2], 0, 0, 500, 560);
+    sigCtx.drawImage(imgAry[2], 0, 0, 500, 500);
+    sigCtx.drawImage(imgAry[4], 0, 45, 500, 500);
+    sigCtx.drawImage(imgAry[1], 0, 0, 500, 560);
+    sigCtx.drawImage(imgAry[3], 0, 0, 500, 560);
+    sigCtx.font = "20px Arial";
+    sigCtx.textAlign = "center";
+    sigCtx.fillStyle = 'rgb(0,0,0)';
+    sigCtx.fillText(address,250,535);
     var data = sig.toDataURL();
     document.getElementById('result').innerHTML = '<img src="' + data + '">';
-//    sigCtx.font = "120px Arial";
-//    sigCtx.textAlign = "center";
-//    sigCtx.fillStyle = 'rgb(0,0,0)';
-//    sigCtx.fillText(name,400,100);
 
 }
 
@@ -119,13 +120,13 @@ function update(){
     name = document.js.name.value;
     loadedCounter = 0;
     imgAry = [];
-    fileAry = ['https://raw.githubusercontent.com/nekonium/nekonium.github.io/master/nekonium.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/arrange.png'];
+    fileAry = ['img/tategami.png', 'img/tategami_trim.png', 'https://chart.apis.google.com/chart?chs=500x500&cht=qr&chld=H|7&chl='+address, 'img/face.png', 'img/font.png'];
     numFiles = fileAry.length;
 
     sig = document.getElementById('sig');
     sigCtx = sig.getContext('2d');
     sig.width = 500;
-    sig.height = 560;
+    sig.height = 550;
     
     loadImgs();
 }
